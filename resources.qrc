@@ -1,6 +1,11 @@
 <RCC>
     <qresource prefix="/new/prefix1">
-        <file>appIcon.svg</file>
         <file>appIcon.png</file>
+        <file>SearchBtn.png</file>
+        <file>DeleteBtn.png</file>
+        <file>InsertBtn.png</file>
+        <file>SavaBtn.png</file>
+        <file>SwapBtn.png</file>
+        <file>appIcon.svg</file>
     </qresource>
 </RCC>
