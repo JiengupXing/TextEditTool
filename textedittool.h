@@ -18,6 +18,8 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_btnOpen_clicked();
+
 private:
     Ui::TextEditTool *ui;
 };
