@@ -11,6 +11,9 @@ TextEditTool::TextEditTool(QWidget *parent) :
     ui(new Ui::TextEditTool)
 {
     ui->setupUi(this);
+    QPalette pal = ui->Nuout->palette();
+    pal.setColor(QPalette::Base, QColor(200,200,200));
+    ui->Nuout->setPalette(pal);
 }
 
 TextEditTool::~TextEditTool()
@@ -27,6 +30,8 @@ void TextEditTool::on_pushButton_clicked()
 
 void TextEditTool::on_btnOpen_clicked()
 {
+    ui->mainTextout->clear();
+    ui->Nuout->clear();
     QString filename = ui->getFileName->text();
     QDir curPath;
     QString filePath = curPath.currentPath() + "/Documents";
@@ -37,7 +42,6 @@ void TextEditTool::on_btnOpen_clicked()
     }
     filePath += "/" + filename;
     QFile *curFile = new QFile;
-    curPath.setCurrent(filePath);
     if(!curFile->exists(filePath))
     {
         QString dlgTitle = "提示";
@@ -46,12 +50,15 @@ void TextEditTool::on_btnOpen_clicked()
     }
     curFile->setFileName(filePath);
     curFile->open(QIODevice::ReadWrite);
+    qint32 nu = 0;
     while(!curFile->atEnd())
     {
-        QByteArray line = curFile->readLine();
-        QString str(line);
+        QString line = curFile->readLine();
+        QString nutoStr = QString::number(++nu);
         ui->mainTextout->append(line);
+        ui->Nuout->append("<strong><font color=\"red\">" + nutoStr + "</font></strong><br></br>");
     }
     //ui->mainTextout->setText(filename);
     ui->getFileName->clear();
+    curFile->close();
 }
